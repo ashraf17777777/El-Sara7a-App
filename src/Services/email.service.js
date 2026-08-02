@@ -3,17 +3,21 @@ import jwt from "jsonwebtoken";
 
 export const sendEmail = async (destEmail, userName) => {
   const transporter = nodemailer.createTransport({
-    host: smtp.gmail.com,
+    host: "smtp.gmail.com",
     port: 465,
     secure: true,
     auth: {
-      user: "ashrafdya663@gmail.com",
-      pass: "yourpassword",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   const token = jwt.sign({ email: destEmail }, process.env.JWT_SECRET_KEY);
   const link = `http://localhost:3000/user/activate/${token}`;
+
+  console.log("=== ACTIVATION LINK ===");
+  console.log(link);
+  console.log("=======================");
 
   const info = await transporter.sendMail({
     from: "'Ashraf Dya' <ashrafdya663@gmail.com>",

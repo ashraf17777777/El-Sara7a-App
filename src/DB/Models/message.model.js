@@ -1,18 +1,24 @@
+//          ---------------------4th File------------------------------
+
 import mongoose from "mongoose";
 import { Types } from "mongoose";
-export const messageSchema = new mongoose.Schema(
+
+const messageSchema = new mongoose.Schema(
   {
     body: {
       type: String,
       required: true,
+      trim: true, // 👈 مسؤولة عن حذف المسافات الفاضية تلقائياً
     },
     sender: {
       type: Types.ObjectId,
       required: true,
+      ref: "User", // 👈 هذا الحقل مرتبط بجدول المستخدمين
     },
-    reciever: {
+    receiver: {
       type: Types.ObjectId,
       required: true,
+      ref: "User", // 👈 هذا الحقل مرتبط بجدول المستخدمين
     },
   },
   {
@@ -20,4 +26,4 @@ export const messageSchema = new mongoose.Schema(
   },
 );
 
-const Message = mongoose.model("Message", message);
+export const messageModel = mongoose.model("Message", messageSchema);

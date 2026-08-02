@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import CryptoJS from "crypto-js";
 import { sendEmail } from "../../Services/email.service.js";
 import { asyncHandler } from "../../Services/asyncHandler.js";
+import jwt from "jsonwebtoken";
 
 export const registerLogic = asyncHandler(async (req, res, next) => {
   const { email, password, phoneNumber, gender, username, confirmedPassword } =

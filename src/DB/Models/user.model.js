@@ -52,5 +52,7 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-const User = mongoose.model("User", userSchema);
+// ✅ بيتحقق الأول: لو الموديل "User" متسجل قبل كدة في mongoose استخدمه، لو مش موجود كرتهه
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+
 export default User;
